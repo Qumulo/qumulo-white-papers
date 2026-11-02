@@ -1,77 +1,170 @@
-body{
-    font-family: Avenir;
-    background-color: #F8F8F8;
-    margin: 0px;
+* {
+    box-sizing: border-box;
 }
 
-#content{
+body {
+    font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #F8F8F8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#header {
+    background-color: #0d1934;
+    margin-bottom: 30px;
+}
+
+#title-bar {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 24px 20px;
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+    display: block;
+}
+
+#content {
     margin: 0 auto;
     width: 1000px;
-}
-
-#header{
-    background-color: #0d1934;
-    margin-bottom: 40px;
-}
-
-#title-bar{
-    width: auto;
-    margin: 0 auto;
-    padding: 40px 50px 40px 60px;
+    flex: 1;
+    padding-bottom: 50px;
 }
 
 #content h1 {
     display: block;
     font-size: 2.2em;
-    margin-block-start: 0.67em;
-    margin-block-end: 0.67em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    margin: 0 0 0.2em 0;
     font-weight: bold;
     color: #005d80;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 12px;
 }
 
+/* Document Cards & Listing */
+.folder-card {
+    background: #ffffff;
+    border: 1px solid #dce2e6;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+.folder-header {
+    background-color: #edf2f7;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0d1934;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dce2e6;
+}
+
+.file-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #cbd5e1;
+    color: #334155;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.file-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.15s ease;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-item:hover {
+    background-color: #f8fafc;
+}
+
+.file-name {
+    color: #1e293b;
+    font-size: 0.95rem;
+    text-transform: capitalize;
+    font-weight: 500;
+    padding-right: 15px;
+}
+
+.file-size {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    font-weight: normal;
+    margin-left: 6px;
+}
+
+.btn-open {
+    display: inline-block;
+    background-color: #005d80;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-open:hover {
+    background-color: #0d1934;
+}
+
+.status-msg {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.status-msg.error {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Footer layout */
 footer {
-    position: absolute;
-    bottom: 0;
+    margin-top: auto;
     width: 100%;
 }
 
-#footer{
+#footer {
     background-color: #0d1934;
-    width: auto;
     height: 130px;
-}
-
-#footer img.grumpquats {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    padding-top: 20px;
-}
-
-@media only screen and (max-width: 1060px) {
-    #content{
-        width: 94%;
-    }
-    #title-bar{
-        width: 94%;
-    }
-}
-
-a{
-    color: #1177cc;
-}
-
-hr{
-    margin-top: 2.5em;
-    margin-bottom: 2em;
-}
-
-.logo {
-    max-width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .grumpquats {
-    max-width: 220px;
+    max-width: 200px;
+    display: block;
+}
+
+/* Responsiveness */
+@media only screen and (max-width: 1060px) {
+    #content,
+    #title-bar {
+        width: 92%;
+    }
 }
