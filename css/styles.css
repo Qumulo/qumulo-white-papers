@@ -1,0 +1,77 @@
+body{
+    font-family: Avenir;
+    background-color: #F8F8F8;
+    margin: 0px;
+}
+
+#content{
+    margin: 0 auto;
+    width: 1000px;
+}
+
+#header{
+    background-color: #0d1934;
+    margin-bottom: 40px;
+}
+
+#title-bar{
+    width: auto;
+    margin: 0 auto;
+    padding: 40px 50px 40px 60px;
+}
+
+#content h1 {
+    display: block;
+    font-size: 2.2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    color: #005d80;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#footer{
+    background-color: #0d1934;
+    width: auto;
+    height: 130px;
+}
+
+#footer img.grumpquats {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 1060px) {
+    #content{
+        width: 94%;
+    }
+    #title-bar{
+        width: 94%;
+    }
+}
+
+a{
+    color: #1177cc;
+}
+
+hr{
+    margin-top: 2.5em;
+    margin-bottom: 2em;
+}
+
+.logo {
+    max-width: 150px;
+}
+
+.grumpquats {
+    max-width: 220px;
+}
