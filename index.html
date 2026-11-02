@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-6 sm:p-12">
+  <div class="max-w-4xl mx-auto">
+    <header class="mb-8 border-b pb-4">
+      <h1 class="text-3xl font-bold tracking-tight text-slate-900">Document Library</h1>
+      <p class="text-sm text-slate-500 mt-1">Organized by folder</p>
+    </header>
+
+    <div id="content" class="space-y-6">
+      <p class="text-slate-400 text-sm">Loading documents...</p>
+    </div>
+  </div>
+
+  <script>
+    // Automatically detects your username and repo from the GitHub Pages URL:
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const USERNAME = window.location.hostname.split('.')[0];
+    const REPO = pathParts[0] || '';
+    const BRANCH = 'main'; // Change to 'master' only if your default branch is master
+
+    async function loadTree() {
+      const container = document.getElementById('content');
+      const url = `https://api.github.com/repos/${USERNAME}/${REPO}/git/trees/${BRANCH}?recursive=1`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Could not load files (${res.status} ${res.statusText})`);
+        const data = await res.json();
+
+        // Find all PDF files anywhere in the repo
+        const pdfFiles = (data.tree || []).filter(
+          item => item.type === 'blob' && item.path.toLowerCase().endsWith('.pdf')
+        );
+
+        if (pdfFiles.length === 0) {
+          container.innerHTML = '<p class="text-slate-500">No PDF files found in repository.</p>';
+          return;
+        }
+
+        // Group the files by directory
+        const groups = {};
+        pdfFiles.forEach(file => {
+          const parts = file.path.split('/');
+          const fileName = parts.pop();
+          const folder = parts.join('/') || 'Root Directory';
+
+          if (!groups[folder]) groups[folder] = [];
+          groups[folder].push({ name: fileName, path: file.path, size: file.size });
+        });
+
+        // Generate the listing UI
+        container.innerHTML = Object.keys(groups).sort().map(folder => `
+          <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+            <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200 font-semibold text-slate-700 text-sm flex items-center justify-between">
+              <span>📁 ${folder}</span>
+              <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full font-normal">
+                ${groups[folder].length} ${groups[folder].length === 1 ? 'file' : 'files'}
+              </span>
+            </div>
+            <ul class="divide-y divide-slate-100">
+              ${groups[folder].map(file => {
+                const cleanName = decodeURIComponent(file.name.replace(/\.pdf$/i, '').replace(/[-_]/g, ' '));
+                const sizeKb = file.size ? `(${(file.size / 1024).toFixed(0)} KB)` : '';
+
+                return `
+                  <li class="px-4 py-3 flex items-center justify-between hover:bg-slate-50 text-sm">
+                    <span class="text-slate-700 capitalize font-medium truncate mr-4">${cleanName} <span class="text-xs text-slate-400 font-normal">${sizeKb}</span></span>
+                    <a href="${encodeURI(file.path)}" target="_blank" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 rounded text-xs font-medium text-slate-600 shrink-0">Open</a>
+                  </li>
+                `;
+              }).join('')}
+            </ul>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        container.innerHTML = `<p class="text-rose-600 text-sm">Failed to scan repository: ${err.message}</p>`;
+      }
+    }
+
+    loadTree();
+  </script>
+</body>
+</html>
