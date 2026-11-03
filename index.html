@@ -37,10 +37,15 @@
   
   <!-- Stylesheet -->
   <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <script src="js/list-files.js" defer></script>
+
+  <!-- Load Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PRC1WZMZME"></script>  
+  <script defer src="/js/googletag.js"></script>
+
+  <!-- Load PDF Files from Repository -->
+  <script defer src="js/list-files.js"></script>  
 </head>
 <body>
-
   <header id="header">
     <div id="title-bar">
       <a href="https://www.qumulo.com/" target="_blank">
@@ -48,12 +53,12 @@
       </a>
     </div>
   </header>
-
+  
   <main id="content">
     <h1>Qumulo White Papers</h1>
     <p>This repository contains the best practices, technical white papers, and architecture white papers for Qumulo.</p>
     <div id="file-list">
-      <p class="status-msg">Loading documents...</p>
+      <p class="status-msg">Loading documents&hellip;</p>
     </div>
   </main>
 
