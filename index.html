@@ -4,6 +4,17 @@
   <!-- Config Metadata -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <!-- Headers -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Content-Security-Policy" content="">
+  <!-- The following replaces frame-ancestors 'self', which is unsupported in meta tags. -->
+  <script>
+    if (self !== top) {
+      top.location = self.location;
+    }
+  </script>  
 
   <!-- Title Metadata -->
   <title>Qumulo White Papers</title>
@@ -34,6 +45,15 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:logo" content="https://white-papers.qumulo.com/images/qumulo-white-papers-630px.png">
+
+  <!-- Define Favicon Variants -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ "images/favicon-32x32.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="194x194" href="{{ "images/favicon-194x194.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ "images/android-chrome-192x192.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ "images/favicon-16x16.png" | relative_url }}">
+  <link rel="manifest" href="{{ "images/site.webmanifest" | relative_url }}">
+  <link rel="mask-icon" href="{{ "images/safari-pinned-tab.svg" | relative_url }}" color="#5bbad5">
   
   <!-- Stylesheet -->
   <link rel="stylesheet" type="text/css" href="css/styles.css">
